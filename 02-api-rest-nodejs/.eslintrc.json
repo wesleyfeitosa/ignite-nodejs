@@ -4,6 +4,9 @@
     "node": true
   },
   "extends": "xo",
+  "plugins": [
+    "import"
+  ],
   "overrides": [
     {
       "extends": [
@@ -15,7 +18,13 @@
       ],
       "rules": {
         "object-curly-spacing": ["error", "always"],
-        "@typescript-eslint/object-curly-spacing": "off"
+        "@typescript-eslint/object-curly-spacing": "off",
+        "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+        "import/order": ["error", {
+          "groups": ["builtin", "external", "internal"],
+          "newlines-between": "always",
+          "alphabetize": {"order": "asc", "caseInsensitive": true}
+        }]
       }
     }
   ],
