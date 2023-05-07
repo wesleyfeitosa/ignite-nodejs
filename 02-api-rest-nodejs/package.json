@@ -10,7 +10,8 @@
     "dev": "tsx watch src/server.ts",
     "knex": "node --no-warnings --loader tsx ./node_modules/.bin/knex",
     "lint": "eslint src --ext .ts --fix",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsup src --out-dir build"
   },
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
@@ -30,6 +31,7 @@
     "eslint-config-xo-typescript": "^0.57.0",
     "eslint-plugin-import": "^2.27.5",
     "supertest": "^6.3.3",
+    "tsup": "^6.7.0",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4",
     "vitest": "^0.31.0"
