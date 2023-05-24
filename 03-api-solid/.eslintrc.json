@@ -21,6 +21,7 @@
         "@typescript-eslint/object-curly-spacing": "off",
         "@typescript-eslint/naming-convention": "off",
         "@typescript-eslint/indent": "off",
+        "@typescript-eslint/ban-types": "off",
         "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
         "import/order": ["error", {
           "groups": ["builtin", "external", "internal"],
