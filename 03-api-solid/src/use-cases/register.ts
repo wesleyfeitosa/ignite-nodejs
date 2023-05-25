@@ -13,7 +13,7 @@ export class RegisterUseCase {
 	constructor(private readonly usersRepository: UsersRepository) {}
 
 	async execute({ name, email, password }: RegisterUseCaseRequest) {
-		const userWithSameEmail = await this.usersRepository.findUniqueByEmail(email);
+		const userWithSameEmail = await this.usersRepository.findByEmail(email);
 
 		if (userWithSameEmail) {
 			throw new UserAlreadyExistsError();
@@ -21,6 +21,10 @@ export class RegisterUseCase {
 
 		const password_hash = await hash(password, 6);
 
-		await this.usersRepository.create({ name, email, password_hash });
+		const user = await this.usersRepository.create({ name, email, password_hash });
+
+		return {
+			user,
+		};
 	}
 }
