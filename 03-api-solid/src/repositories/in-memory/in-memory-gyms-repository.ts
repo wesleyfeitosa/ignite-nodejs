@@ -3,7 +3,8 @@ import { randomUUID } from 'node:crypto';
 import { type Prisma, type Gym } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime/library';
 
-import { type GymsRepository } from '../gyms-repository';
+import { getDistanceBetweenCoordinates } from '../../utils/get-distance-between-coordinates';
+import { type FindManyNearbyParams, type GymsRepository } from '../gyms-repository';
 
 export class InMemoryGymsRepository implements GymsRepository {
 	public items: Gym[] = [];
@@ -15,7 +16,7 @@ export class InMemoryGymsRepository implements GymsRepository {
 			description: data.description ?? null,
 			phone: data.phone ?? null,
 			latitude: new Decimal(Number(data.latitude)),
-			longitude: new Decimal(Number(data.latitude)),
+			longitude: new Decimal(Number(data.longitude)),
 		};
 
 		this.items.push(gym);
@@ -23,7 +24,7 @@ export class InMemoryGymsRepository implements GymsRepository {
 		return gym;
 	}
 
-	async bulkCreate(data: Prisma.GymCreateInput[]): Promise<Gym[]> {
+	async bulkCreate(data: Prisma.GymCreateInput[]) {
 		const createdItems: Gym[] = [];
 
 		for (const dataItem of data) {
@@ -33,7 +34,7 @@ export class InMemoryGymsRepository implements GymsRepository {
 				description: dataItem.description ?? null,
 				phone: dataItem.phone ?? null,
 				latitude: new Decimal(Number(dataItem.latitude)),
-				longitude: new Decimal(Number(dataItem.latitude)),
+				longitude: new Decimal(Number(dataItem.longitude)),
 			};
 
 			createdItems.push(gym);
@@ -41,6 +42,12 @@ export class InMemoryGymsRepository implements GymsRepository {
 		}
 
 		return createdItems;
+	}
+
+	async searchMany(query: string, page: number) {
+		return this.items
+			.filter((item) => item.title.includes(query))
+			.slice((page - 1) * 20, page * 20);
 	}
 
 	async findById(gymId: string) {
@@ -53,9 +60,15 @@ export class InMemoryGymsRepository implements GymsRepository {
 		return gym;
 	}
 
-	async searchMany(query: string, page: number): Promise<Gym[]> {
-		return this.items
-			.filter((item) => item.title.includes(query))
-			.slice((page - 1) * 20, page * 20);
+	async findManyNearby({ latitude, longitude }: FindManyNearbyParams) {
+		return this.items.filter((item) => {
+			const distance = getDistanceBetweenCoordinates(
+				{ latitude, longitude },
+				{ latitude: item.latitude.toNumber(), longitude: item.longitude.toNumber() },
+			);
+			console.log('distance: ', distance);
+
+			return distance < 10;
+		});
 	}
 }
