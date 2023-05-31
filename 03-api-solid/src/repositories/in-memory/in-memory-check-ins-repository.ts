@@ -61,4 +61,16 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
 
 		return checkInOnSameDate;
 	}
+
+	async countByUserId(userId: string): Promise<number> {
+		const checkInsCount = this.items.reduce((accumulator, currentValue) => {
+			if (currentValue.user_id === userId) {
+				return accumulator + 1;
+			}
+
+			return accumulator;
+		}, 0);
+
+		return checkInsCount;
+	}
 }

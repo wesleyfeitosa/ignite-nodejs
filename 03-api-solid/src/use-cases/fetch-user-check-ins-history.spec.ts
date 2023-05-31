@@ -4,7 +4,7 @@ import { FetchUserCheckInsHistoryUseCase } from './fetch-user-check-ins-history'
 import { type CheckInsRepository } from '../repositories/check-ins-repository';
 import { InMemoryCheckInsRepository } from '../repositories/in-memory/in-memory-check-ins-repository';
 
-describe(' Fetch User Check In History Use Case', () => {
+describe('Fetch User Check In History Use Case', () => {
 	let checkInsRepository: CheckInsRepository;
 	let sut: FetchUserCheckInsHistoryUseCase;
 

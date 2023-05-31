@@ -7,7 +7,15 @@ export class PrismaGymsRepository implements GymsRepository {
 		throw new Error('Method not implemented.');
 	}
 
+	async bulkCreate(data: Prisma.GymCreateInput[]): Promise<Gym[]> {
+		throw new Error('Method not implemented.');
+	}
+
 	async findById(userId: string): Promise<Gym | null> {
+		throw new Error('Method not implemented.');
+	}
+
+	async searchMany(query: string, page: number): Promise<Gym[]> {
 		throw new Error('Method not implemented.');
 	}
 }

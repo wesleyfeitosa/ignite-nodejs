@@ -36,4 +36,8 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
 
 		return checkInOnSameDate;
 	}
+
+	async countByUserId(userId: string): Promise<number> {
+		throw new Error('Method not implemented.');
+	}
 }

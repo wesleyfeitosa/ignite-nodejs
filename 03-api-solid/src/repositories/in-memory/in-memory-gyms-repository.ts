@@ -23,6 +23,26 @@ export class InMemoryGymsRepository implements GymsRepository {
 		return gym;
 	}
 
+	async bulkCreate(data: Prisma.GymCreateInput[]): Promise<Gym[]> {
+		const createdItems: Gym[] = [];
+
+		for (const dataItem of data) {
+			const gym = {
+				id: randomUUID(),
+				title: dataItem.title,
+				description: dataItem.description ?? null,
+				phone: dataItem.phone ?? null,
+				latitude: new Decimal(Number(dataItem.latitude)),
+				longitude: new Decimal(Number(dataItem.latitude)),
+			};
+
+			createdItems.push(gym);
+			this.items.push(gym);
+		}
+
+		return createdItems;
+	}
+
 	async findById(gymId: string) {
 		const gym = this.items.find((item) => item.id === gymId);
 
@@ -31,5 +51,11 @@ export class InMemoryGymsRepository implements GymsRepository {
 		}
 
 		return gym;
+	}
+
+	async searchMany(query: string, page: number): Promise<Gym[]> {
+		return this.items
+			.filter((item) => item.title.includes(query))
+			.slice((page - 1) * 20, page * 20);
 	}
 }
