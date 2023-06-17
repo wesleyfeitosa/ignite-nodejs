@@ -13,7 +13,7 @@
     "test:ui": "vitest --ui"
   },
   "keywords": [],
-  "author": "",
+  "author": "Wesley Feitosa",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "4.14.1",

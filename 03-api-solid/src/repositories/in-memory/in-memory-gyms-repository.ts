@@ -61,14 +61,15 @@ export class InMemoryGymsRepository implements GymsRepository {
 	}
 
 	async findManyNearby({ latitude, longitude }: FindManyNearbyParams) {
+		const TEN_KILOMETERS_AWAY = 10;
+
 		return this.items.filter((item) => {
 			const distance = getDistanceBetweenCoordinates(
 				{ latitude, longitude },
 				{ latitude: item.latitude.toNumber(), longitude: item.longitude.toNumber() },
 			);
-			console.log('distance: ', distance);
 
-			return distance < 10;
+			return distance < TEN_KILOMETERS_AWAY;
 		});
 	}
 }

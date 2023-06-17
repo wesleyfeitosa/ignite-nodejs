@@ -22,7 +22,7 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
 		return checkIn;
 	}
 
-	async bulkCreate(data: Prisma.CheckInUncheckedCreateInput[]): Promise<CheckIn[]> {
+	async bulkCreate(data: Prisma.CheckInUncheckedCreateInput[]) {
 		const createdItems: CheckIn[] = [];
 		for (const dataItem of data) {
 			const checkIn = {
@@ -38,6 +38,16 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
 		}
 
 		return createdItems;
+	}
+
+	async save(checkIn: CheckIn) {
+		const checkInIndex = this.items.findIndex((item) => item.id === checkIn.id);
+
+		if (checkInIndex >= 0) {
+			this.items[checkInIndex] = checkIn;
+		}
+
+		return checkIn;
 	}
 
 	async findManyByUserId(userId: string, page: number) {
@@ -62,7 +72,17 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
 		return checkInOnSameDate;
 	}
 
-	async countByUserId(userId: string): Promise<number> {
+	async findById(checkInId: string) {
+		const checkIn = this.items.find((item) => item.id === checkInId);
+
+		if (!checkIn) {
+			return null;
+		}
+
+		return checkIn;
+	}
+
+	async countByUserId(userId: string) {
 		const checkInsCount = this.items.reduce((accumulator, currentValue) => {
 			if (currentValue.user_id === userId) {
 				return accumulator + 1;
