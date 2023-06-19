@@ -5,7 +5,7 @@ interface FetchNearbyGymsRequest {
 	userLongitude: number;
 }
 
-export class FetchNearbyGyms {
+export class FetchNearbyGymsUseCase {
 	constructor(private readonly gymsRepository: GymsRepository) {}
 
 	async execute({ userLatitude, userLongitude }: FetchNearbyGymsRequest) {
