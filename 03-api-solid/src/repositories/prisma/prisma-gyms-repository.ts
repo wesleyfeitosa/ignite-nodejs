@@ -1,25 +1,51 @@
 import { type Prisma, type Gym } from '@prisma/client';
 
 import { type FindManyNearbyParams, type GymsRepository } from '../gyms-repository';
+import { prisma } from '@/lib/prisma';
 
 export class PrismaGymsRepository implements GymsRepository {
-	async create(data: Prisma.GymCreateInput): Promise<Gym> {
-		throw new Error('Method not implemented.');
+	async create(data: Prisma.GymCreateInput) {
+		const gym = await prisma.gym.create({ data });
+
+		return gym;
 	}
 
-	async bulkCreate(data: Prisma.GymCreateInput[]): Promise<Gym[]> {
-		throw new Error('Method not implemented.');
+	async bulkCreate(data: Prisma.GymCreateInput[]) {
+		const gyms = await prisma.gym.createMany({ data });
+
+		return gyms.count;
 	}
 
-	async searchMany(query: string, page: number): Promise<Gym[]> {
-		throw new Error('Method not implemented.');
+	async searchMany(query: string, page: number) {
+		const gyms = await prisma.gym.findMany({
+			where: { title: { contains: query } },
+			take: 20,
+			skip: (page - 1) * 20,
+		});
+
+		return gyms;
 	}
 
-	async findById(userId: string): Promise<Gym | null> {
-		throw new Error('Method not implemented.');
+	async findById(gymId: string) {
+		const gym = await prisma.gym.findUnique({
+			where: { id: gymId },
+		});
+
+		return gym;
 	}
 
-	async findManyNearby(params: FindManyNearbyParams): Promise<Gym[]> {
-		throw new Error('Method not implemented.');
+	async findManyNearby({ latitude, longitude }: FindManyNearbyParams) {
+		const gyms = await prisma.$queryRaw<Gym[]>`
+			SELECT * from gyms
+			WHERE ( 6371 * acos( cos( radians(${latitude}) ) 
+			* cos( radians( latitude ) ) 
+			* cos( radians( longitude ) 
+			- radians(${longitude}) ) 
+			+ sin( radians(${latitude}) ) 
+			* sin( radians( latitude ) ) ) ) 
+			<= 10
+		`;
+
+		return gyms;
 	}
 }

@@ -41,7 +41,7 @@ export class InMemoryGymsRepository implements GymsRepository {
 			this.items.push(gym);
 		}
 
-		return createdItems;
+		return createdItems.length;
 	}
 
 	async searchMany(query: string, page: number) {

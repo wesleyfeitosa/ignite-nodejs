@@ -6,21 +6,34 @@ import { prisma } from '@/lib/prisma';
 export class PrismaCheckInsRepository implements CheckInsRepository {
 	async create(data: Prisma.CheckInUncheckedCreateInput) {
 		const checkIn = await prisma.checkIn.create({
-			data: {
-				user_id: data.user_id,
-				gym_id: data.gym_id,
-			},
+			data,
 		});
 
 		return checkIn;
 	}
 
-	async bulkCreate(data: Prisma.CheckInUncheckedCreateInput[]): Promise<CheckIn[]> {
-		throw new Error('Method not implemented.');
+	async bulkCreate(data: Prisma.CheckInUncheckedCreateInput[]) {
+		const checkIns = await prisma.checkIn.createMany({
+			data,
+		});
+
+		return checkIns.count;
 	}
 
-	async findManyByUserId(userId: string): Promise<CheckIn[]> {
-		throw new Error('Method not implemented.');
+	async save(data: CheckIn): Promise<CheckIn> {
+		const checkIn = await prisma.checkIn.update({ where: { id: data.id }, data });
+
+		return checkIn;
+	}
+
+	async findManyByUserId(userId: string, page: number) {
+		const checkIns = await prisma.checkIn.findMany({
+			where: { user_id: userId },
+			take: 20,
+			skip: (page - 1) * 20,
+		});
+
+		return checkIns;
 	}
 
 	async findByUserIdOnDate(userId: string, date: Date) {
@@ -37,7 +50,21 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
 		return checkInOnSameDate;
 	}
 
-	async countByUserId(userId: string): Promise<number> {
-		throw new Error('Method not implemented.');
+	async findById(checkInId: string) {
+		const checkIn = await prisma.checkIn.findUnique({
+			where: {
+				id: checkInId,
+			},
+		});
+
+		return checkIn;
+	}
+
+	async countByUserId(userId: string) {
+		const count = await prisma.checkIn.count({
+			where: { user_id: userId },
+		});
+
+		return count;
 	}
 }
