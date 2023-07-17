@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { FetchNearbyGyms } from './fetch-nearby-gyms';
+import { FetchNearbyGymsUseCase } from './fetch-nearby-gyms';
 import { type GymsRepository } from '../repositories/gyms-repository';
 import { InMemoryGymsRepository } from '../repositories/in-memory/in-memory-gyms-repository';
 
 describe('Fetch Nearby Gyms Use Case', () => {
 	let gymsInsRepository: GymsRepository;
-	let sut: FetchNearbyGyms;
+	let sut: FetchNearbyGymsUseCase;
 
 	beforeEach(async () => {
 		gymsInsRepository = new InMemoryGymsRepository();
-		sut = new FetchNearbyGyms(gymsInsRepository);
+		sut = new FetchNearbyGymsUseCase(gymsInsRepository);
 	});
 
 	it('should be able to fetch nearby gyms', async () => {

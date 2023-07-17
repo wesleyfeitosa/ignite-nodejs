@@ -37,7 +37,7 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
 			this.items.push(checkIn);
 		}
 
-		return createdItems;
+		return createdItems.length;
 	}
 
 	async save(checkIn: CheckIn) {
