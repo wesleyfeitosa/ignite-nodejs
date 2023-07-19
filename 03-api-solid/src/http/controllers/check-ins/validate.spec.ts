@@ -45,10 +45,18 @@ describe('Check-in Validate (e2e)', () => {
 			.get('/check-ins/history')
 			.set('Authorization', `Bearer ${token}`);
 
+		expect(responseCheckInHistory.body.checkIns[0].validated_at).toBeNull();
+
 		const response = await request(app.server)
 			.patch(`/check-ins/${responseCheckInHistory.body.checkIns[0].id}/validate`)
 			.set('Authorization', `Bearer ${token}`);
 
 		expect(response.statusCode).toEqual(204);
+
+		const newResponseCheckInHistory: CheckInsResponseProps = await request(app.server)
+			.get('/check-ins/history')
+			.set('Authorization', `Bearer ${token}`);
+
+		expect(newResponseCheckInHistory.body.checkIns[0].validated_at).toEqual(expect.any(String));
 	});
 });
