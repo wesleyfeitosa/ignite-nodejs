@@ -3,8 +3,8 @@ name: Run Unit Tests
 on: [push]
 
 jobs:
-  run-unit-tests:
-    name: Run Unit Tests
+  run-api-solid-unit-tests:
+    name: Run Api Solid Unit Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+      - run: cd 03-api-solid
       - run: npm ci
       - run: npm run test
       
