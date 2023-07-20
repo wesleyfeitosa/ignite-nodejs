@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: cd 03-api-solid
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'npm'
-      - run: cd 03-api-solid
       - run: npm ci
       - run: npm run test
       
