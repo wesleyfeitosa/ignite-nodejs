@@ -1,6 +1,6 @@
+import { Answer } from '@/domain/forum/enterprise/entities/answer';
 import { UniqueEntityid } from '@/core/entities/unique-entity-id';
 import { type AnswersRepository } from '../repositories/answers-repository';
-import { Answer } from '../entities/answer';
 
 interface AnswerQuestionUseCaseRquest {
 	instructorId: string;
@@ -20,6 +20,6 @@ export class AnswerQuestionUseCase {
 
 		await this.answersRepository.create(answer);
 
-		return answer;
+		return { answer };
 	}
 }
