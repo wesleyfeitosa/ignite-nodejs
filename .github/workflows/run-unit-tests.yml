@@ -23,4 +23,25 @@ jobs:
       - name: Run unit tests
         working-directory: 03-api-solid/
         run: npm run test
+  
+  run-clean-ddd-unit-tests:
+    name: Run Clean DDD Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: 04-clean-ddd/
+        run: npm ci
+
+      - name: Run unit tests
+        working-directory: 04-clean-ddd/
+        run: npm run test
       
