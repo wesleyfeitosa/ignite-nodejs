@@ -24,6 +24,6 @@ export class EditAnswerUseCase {
 
 		await this.answersRepository.save(answer);
 
-		return {};
+		return { answer };
 	}
 }
