@@ -4,7 +4,7 @@ interface GetQuestionBySlugRequest {
 	slug: string;
 }
 
-export class GetQuestionBySlug {
+export class GetQuestionBySlugUseCase {
 	constructor(private readonly questionsRepository: QuestionsRepository) {}
 
 	async execute({ slug }: GetQuestionBySlugRequest) {
