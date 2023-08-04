@@ -2,7 +2,7 @@ import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questio
 
 import { CreateQuestionUseCase } from './create-question';
 
-describe('Create Question', () => {
+describe('Create question', () => {
 	let questionsRepository: InMemoryQuestionsRepository;
 	let sut: CreateQuestionUseCase;
 

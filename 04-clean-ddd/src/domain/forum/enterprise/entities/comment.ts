@@ -1,38 +1,20 @@
-import { type Optional } from '@/core/types/optional';
 import { type UniqueEntityid } from '@/core/entities/unique-entity-id';
 import { Entity } from '@/core/entities/entity';
 
-export interface AnswerProps {
+export interface CommentProps {
 	authorId: UniqueEntityid;
-	questionId: UniqueEntityid;
 	content: string;
 	createdAt: Date;
 	updatedAt?: Date;
 }
 
-export class Answer extends Entity<AnswerProps> {
-	static create(props: Optional<AnswerProps, 'createdAt'>, id?: UniqueEntityid) {
-		const answer = new Answer(
-			{
-				...props,
-				createdAt: props.createdAt ?? new Date(),
-			},
-			id,
-		);
-
-		return answer;
-	}
-
+export abstract class Comment<Props extends CommentProps> extends Entity<Props> {
 	private touch() {
 		this.props.updatedAt = new Date();
 	}
 
 	get authorId() {
 		return this.props.authorId;
-	}
-
-	get questionId() {
-		return this.props.questionId;
 	}
 
 	get content() {

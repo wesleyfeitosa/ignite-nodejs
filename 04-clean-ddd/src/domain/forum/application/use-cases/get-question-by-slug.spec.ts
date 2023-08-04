@@ -2,15 +2,15 @@ import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questio
 import { makeQuestion } from 'test/factories/make-question';
 
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
-import { GetQuestionBySlug } from './get-question-by-slug';
+import { GetQuestionBySlugUseCase } from './get-question-by-slug';
 
 describe('Get question by slug', () => {
 	let questionsRepository: InMemoryQuestionsRepository;
-	let sut: GetQuestionBySlug;
+	let sut: GetQuestionBySlugUseCase;
 
 	beforeEach(() => {
 		questionsRepository = new InMemoryQuestionsRepository();
-		sut = new GetQuestionBySlug(questionsRepository);
+		sut = new GetQuestionBySlugUseCase(questionsRepository);
 	});
 
 	it('should be able to get a question by slug', async () => {
