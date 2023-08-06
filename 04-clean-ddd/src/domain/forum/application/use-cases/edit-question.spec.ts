@@ -2,6 +2,7 @@ import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questio
 import { makeQuestion } from 'test/factories/make-question';
 
 import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { NotAllowedError } from './errors/not-allowed-error';
 import { EditQuestionUseCase } from './edit-question';
 
 describe('Edit question', () => {
@@ -40,13 +41,14 @@ describe('Edit question', () => {
 		);
 		await questionsRepository.create(questionCreated);
 
-		await expect(async () =>
-			sut.execute({
-				authorId: 'author-02',
-				questionId: 'question-01',
-				title: 'New title',
-				content: 'New content',
-			}),
-		).rejects.toBeInstanceOf(Error);
+		const result = await sut.execute({
+			authorId: 'author-02',
+			questionId: 'question-01',
+			title: 'New title',
+			content: 'New content',
+		});
+
+		expect(result.isLeft()).toBeTruthy();
+		expect(result.value).toBeInstanceOf(NotAllowedError);
 	});
 });

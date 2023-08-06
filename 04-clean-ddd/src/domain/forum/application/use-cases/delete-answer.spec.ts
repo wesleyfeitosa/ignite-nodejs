@@ -2,6 +2,7 @@ import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-r
 import { makeAnswer } from 'test/factories/make-answer';
 
 import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { NotAllowedError } from './errors/not-allowed-error';
 import { DeleteAnswerUseCase } from './delete-answer';
 
 describe('Delete answer', () => {
@@ -35,11 +36,12 @@ describe('Delete answer', () => {
 		);
 		await answerRepository.create(answerCreated);
 
-		await expect(async () =>
-			sut.execute({
-				authorId: 'author-02',
-				answerId: 'answer-01',
-			}),
-		).rejects.toBeInstanceOf(Error);
+		const result = await sut.execute({
+			authorId: 'author-02',
+			answerId: 'answer-01',
+		});
+
+		expect(result.isLeft()).toBeTruthy();
+		expect(result.value).toBeInstanceOf(NotAllowedError);
 	});
 });

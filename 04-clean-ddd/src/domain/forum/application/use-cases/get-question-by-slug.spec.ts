@@ -19,12 +19,14 @@ describe('Get question by slug', () => {
 		});
 		await questionsRepository.create(questionCreated);
 
-		const { question } = await sut.execute({
+		const result = await sut.execute({
 			slug: 'new-question',
 		});
 
-		expect(question.id).toBeTruthy();
-		expect(question.title).toEqual(questionCreated.title);
-		expect(question.slug.value).toEqual('new-question');
+		expect(result.isRight()).toBeTruthy();
+		if (result.isRight()) {
+			expect(result.value.question.title).toEqual(questionCreated.title);
+			expect(result.value.question.slug.value).toEqual('new-question');
+		}
 	});
 });

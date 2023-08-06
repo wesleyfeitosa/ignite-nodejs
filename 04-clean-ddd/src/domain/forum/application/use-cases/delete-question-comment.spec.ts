@@ -4,6 +4,7 @@ import { makeQuestionComment } from 'test/factories/make-question-comment';
 import { makeQuestion } from 'test/factories/make-question';
 
 import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { NotAllowedError } from './errors/not-allowed-error';
 import { DeleteQuestionCommentUseCase } from './delete-question-comment';
 
 describe('Delete question comment comment', () => {
@@ -45,11 +46,12 @@ describe('Delete question comment comment', () => {
 		});
 		await questionCommentsRepository.create(questionCommentCreated);
 
-		await expect(async () =>
-			sut.execute({
-				authorId: 'author-02',
-				questionCommentId: questionCommentCreated.id.toString(),
-			}),
-		).rejects.toBeInstanceOf(Error);
+		const result = await sut.execute({
+			authorId: 'author-02',
+			questionCommentId: questionCommentCreated.id.toString(),
+		});
+
+		expect(result.isLeft()).toBeTruthy();
+		expect(result.value).toBeInstanceOf(NotAllowedError);
 	});
 });
