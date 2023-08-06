@@ -19,13 +19,15 @@ describe('Comment on question', () => {
 		const questionCreated = makeQuestion();
 		await questionsRepository.create(questionCreated);
 
-		const { questionComment } = await sut.execute({
+		const result = await sut.execute({
 			content: 'This is a relative comment',
 			authorId: questionCreated.authorId.toString(),
 			questionId: questionCreated.id.toString(),
 		});
 
-		expect(questionComment.id).toBeTruthy();
-		expect(questionComment.content).toEqual('This is a relative comment');
+		expect(result.isRight()).toBeTruthy();
+		if (result.isRight()) {
+			expect(result.value.questionComment.content).toEqual('This is a relative comment');
+		}
 	});
 });

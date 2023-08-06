@@ -40,12 +40,13 @@ describe('Fetch question answers', () => {
 		);
 		await answersRepository.create(answerCreated3);
 
-		const { answers } = await sut.execute({
+		const result = await sut.execute({
 			questionId: questionCreated.id.toString(),
 			page: 1,
 		});
 
-		expect(answers).toHaveLength(2);
+		expect(result.isRight()).toBeTruthy();
+		expect(result.value?.answers).toHaveLength(2);
 	});
 
 	it('should be able to fetch question answers by page', async () => {
@@ -62,9 +63,9 @@ describe('Fetch question answers', () => {
 
 		await answersRepository.bulkCreate(data);
 
-		const { answers } = await sut.execute({ page: 2, questionId: questionCreated.id.toString() });
+		const result = await sut.execute({ page: 2, questionId: questionCreated.id.toString() });
 
-		expect(answers).toBeTruthy();
-		expect(answers).toHaveLength(2);
+		expect(result.isRight()).toBeTruthy();
+		expect(result.value?.answers).toHaveLength(2);
 	});
 });

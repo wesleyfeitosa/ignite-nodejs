@@ -37,12 +37,13 @@ describe('Fetch answer comments', () => {
 		});
 		await answerCommentsRepository.create(answercommentCreated3);
 
-		const { answerComments } = await sut.execute({
+		const result = await sut.execute({
 			answerId: answerCreated.id.toString(),
 			page: 1,
 		});
 
-		expect(answerComments).toHaveLength(2);
+		expect(result.isRight()).toBeTruthy();
+		expect(result.value?.answerComments).toHaveLength(2);
 	});
 
 	it('should be able to fetch answer answercomments by page', async () => {
@@ -56,12 +57,12 @@ describe('Fetch answer comments', () => {
 
 		await answerCommentsRepository.bulkCreate(data);
 
-		const { answerComments } = await sut.execute({
+		const result = await sut.execute({
 			page: 2,
 			answerId: answerCreated.id.toString(),
 		});
 
-		expect(answerComments).toBeTruthy();
-		expect(answerComments).toHaveLength(2);
+		expect(result.isRight()).toBeTruthy();
+		expect(result.value?.answerComments).toHaveLength(2);
 	});
 });
