@@ -3,7 +3,7 @@ import { InMemoryAnswerCommentsRepository } from 'test/repositories/in-memory-an
 import { makeAnswerComment } from 'test/factories/make-answer-comment';
 import { makeAnswer } from 'test/factories/make-answer';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { FetchAnswerCommentsUseCase } from './fetch-answer-comments';
 
 describe('Fetch answer comments', () => {
@@ -28,7 +28,7 @@ describe('Fetch answer comments', () => {
 		await answerCommentsRepository.create(answercommentCreated1);
 		const answercommentCreated2 = makeAnswerComment({
 			authorId: answerCreated.authorId,
-			answerId: new UniqueEntityid('answer-02'),
+			answerId: new UniqueEntityId('answer-02'),
 		});
 		await answerCommentsRepository.create(answercommentCreated2);
 		const answercommentCreated3 = makeAnswerComment({

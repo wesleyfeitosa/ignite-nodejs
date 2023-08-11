@@ -3,7 +3,7 @@ import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-
 import { makeQuestionComment } from 'test/factories/make-question-comment';
 import { makeQuestion } from 'test/factories/make-question';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { DeleteQuestionCommentUseCase } from './delete-question-comment';
 
@@ -41,7 +41,7 @@ describe('Delete question comment comment', () => {
 		await questionsRepository.create(questionCreated);
 
 		const questionCommentCreated = makeQuestionComment({
-			authorId: new UniqueEntityid('author-01'),
+			authorId: new UniqueEntityId('author-01'),
 			questionId: questionCreated.id,
 		});
 		await questionCommentsRepository.create(questionCommentCreated);

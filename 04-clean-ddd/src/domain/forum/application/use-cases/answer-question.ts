@@ -1,6 +1,6 @@
 import { Answer } from '@/domain/forum/enterprise/entities/answer';
 import { right, type Either } from '@/core/errors/either';
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type AnswersRepository } from '../repositories/answers-repository';
 
 interface AnswerQuestionUseCaseRequest {
@@ -21,8 +21,8 @@ export class AnswerQuestionUseCase {
 	}: AnswerQuestionUseCaseRequest): Promise<AnswerQuestionUseCaseResponse> {
 		const answer = Answer.create({
 			content,
-			authorId: new UniqueEntityid(instructorId),
-			questionId: new UniqueEntityid(questionId),
+			authorId: new UniqueEntityId(instructorId),
+			questionId: new UniqueEntityId(questionId),
 		});
 
 		await this.answersRepository.create(answer);

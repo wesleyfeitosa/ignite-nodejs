@@ -1,8 +1,8 @@
-import { type UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { type UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Entity } from '@/core/entities/entity';
 
 export interface CommentProps {
-	authorId: UniqueEntityid;
+	authorId: UniqueEntityId;
 	content: string;
 	createdAt: Date;
 	updatedAt?: Date;

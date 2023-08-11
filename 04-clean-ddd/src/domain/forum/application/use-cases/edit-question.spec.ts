@@ -1,7 +1,7 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
 import { makeQuestion } from 'test/factories/make-question';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { EditQuestionUseCase } from './edit-question';
 
@@ -16,8 +16,8 @@ describe('Edit question', () => {
 
 	it('should be able to edit a question', async () => {
 		const questionCreated = makeQuestion(
-			{ authorId: new UniqueEntityid('author-01'), title: 'Old title', content: 'Old content' },
-			new UniqueEntityid('question-01'),
+			{ authorId: new UniqueEntityId('author-01'), title: 'Old title', content: 'Old content' },
+			new UniqueEntityId('question-01'),
 		);
 		await questionsRepository.create(questionCreated);
 
@@ -36,8 +36,8 @@ describe('Edit question', () => {
 
 	it('should not be able to edit a question from another author', async () => {
 		const questionCreated = makeQuestion(
-			{ authorId: new UniqueEntityid('author-01'), title: 'Old title', content: 'old content' },
-			new UniqueEntityid('question-01'),
+			{ authorId: new UniqueEntityId('author-01'), title: 'Old title', content: 'old content' },
+			new UniqueEntityId('question-01'),
 		);
 		await questionsRepository.create(questionCreated);
 

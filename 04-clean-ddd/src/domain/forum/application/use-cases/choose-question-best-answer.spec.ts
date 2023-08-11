@@ -3,7 +3,7 @@ import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-r
 import { makeQuestion } from 'test/factories/make-question';
 import { makeAnswer } from 'test/factories/make-answer';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer';
 
@@ -19,11 +19,11 @@ describe('Choose question best answer', () => {
 	});
 
 	it('should be able to choose the best answer of a question', async () => {
-		const questionCreated = makeQuestion({ authorId: new UniqueEntityid('author-01') });
+		const questionCreated = makeQuestion({ authorId: new UniqueEntityId('author-01') });
 		await questionsRepository.create(questionCreated);
 
 		const answerCreated = makeAnswer({
-			authorId: new UniqueEntityid('author-01'),
+			authorId: new UniqueEntityId('author-01'),
 			questionId: questionCreated.id,
 		});
 		await answerRepository.create(answerCreated);
@@ -37,11 +37,11 @@ describe('Choose question best answer', () => {
 	});
 
 	it('should not be able to choose the best answer of a question from another author', async () => {
-		const questionCreated = makeQuestion({ authorId: new UniqueEntityid('author-01') });
+		const questionCreated = makeQuestion({ authorId: new UniqueEntityId('author-01') });
 		await questionsRepository.create(questionCreated);
 
 		const answerCreated = makeAnswer({
-			authorId: new UniqueEntityid('author-01'),
+			authorId: new UniqueEntityId('author-01'),
 			questionId: questionCreated.id,
 		});
 		await answerRepository.create(answerCreated);

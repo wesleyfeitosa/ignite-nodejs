@@ -1,26 +1,32 @@
 import dayjs from 'dayjs';
 
 import { type Optional } from '@/core/types/optional';
-import { type UniqueEntityid } from '@/core/entities/unique-entity-id';
-import { Entity } from '@/core/entities/entity';
+import { type UniqueEntityId } from '@/core/entities/unique-entity-id';
+import { AggregateRoot } from '@/core/entities/aggregate-root';
 import { Slug } from './value-objects/slug';
+import { type QuestionAttachment } from './question-attachment';
 
 export interface QuestionProps {
-	authorId: UniqueEntityid;
-	bestAnswerId?: UniqueEntityid;
+	authorId: UniqueEntityId;
+	bestAnswerId?: UniqueEntityId;
 	title: string;
 	slug: Slug;
 	content: string;
+	attachments: QuestionAttachment[];
 	createdAt: Date;
 	updatedAt?: Date;
 }
 
-export class Question extends Entity<QuestionProps> {
-	static create(props: Optional<QuestionProps, 'createdAt' | 'slug'>, id?: UniqueEntityid) {
+export class Question extends AggregateRoot<QuestionProps> {
+	static create(
+		props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>,
+		id?: UniqueEntityId,
+	) {
 		const question = new Question(
 			{
 				...props,
 				slug: props.slug ?? Slug.createFromText(props.title),
+				attachments: props.attachments ?? [],
 				createdAt: props.createdAt ?? new Date(),
 			},
 			id,
@@ -41,7 +47,7 @@ export class Question extends Entity<QuestionProps> {
 		return this.props.bestAnswerId;
 	}
 
-	set bestAnswerId(bestAnswerId: UniqueEntityid | undefined) {
+	set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
 		this.props.bestAnswerId = bestAnswerId;
 		this.touch();
 	}
@@ -67,6 +73,14 @@ export class Question extends Entity<QuestionProps> {
 	set content(content: string) {
 		this.props.content = content;
 		this.touch();
+	}
+
+	get attachments() {
+		return this.props.attachments;
+	}
+
+	set attachments(attachments: QuestionAttachment[]) {
+		this.props.attachments = attachments;
 	}
 
 	get createdAt() {

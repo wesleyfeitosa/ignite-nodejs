@@ -3,7 +3,7 @@ import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-r
 import { makeQuestion } from 'test/factories/make-question';
 import { makeAnswer } from 'test/factories/make-answer';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { FetchQuestionAnswersUseCase } from './fetch-question-answers';
 
 describe('Fetch question answers', () => {
@@ -19,24 +19,24 @@ describe('Fetch question answers', () => {
 
 	it('should be able to fetch question answers', async () => {
 		const questionCreated = makeQuestion(
-			{ authorId: new UniqueEntityid('author-01') },
-			new UniqueEntityid('question-01'),
+			{ authorId: new UniqueEntityId('author-01') },
+			new UniqueEntityId('question-01'),
 		);
 		await questionsRepository.create(questionCreated);
 
 		const answerCreated1 = makeAnswer(
-			{ authorId: new UniqueEntityid('author-01'), questionId: questionCreated.id },
-			new UniqueEntityid('answer-01'),
+			{ authorId: new UniqueEntityId('author-01'), questionId: questionCreated.id },
+			new UniqueEntityId('answer-01'),
 		);
 		await answersRepository.create(answerCreated1);
 		const answerCreated2 = makeAnswer(
-			{ authorId: new UniqueEntityid('author-01'), questionId: new UniqueEntityid('question-02') },
-			new UniqueEntityid('answer-01'),
+			{ authorId: new UniqueEntityId('author-01'), questionId: new UniqueEntityId('question-02') },
+			new UniqueEntityId('answer-01'),
 		);
 		await answersRepository.create(answerCreated2);
 		const answerCreated3 = makeAnswer(
-			{ authorId: new UniqueEntityid('author-01'), questionId: questionCreated.id },
-			new UniqueEntityid('answer-01'),
+			{ authorId: new UniqueEntityId('author-01'), questionId: questionCreated.id },
+			new UniqueEntityId('answer-01'),
 		);
 		await answersRepository.create(answerCreated3);
 
@@ -51,8 +51,8 @@ describe('Fetch question answers', () => {
 
 	it('should be able to fetch question answers by page', async () => {
 		const questionCreated = makeQuestion(
-			{ authorId: new UniqueEntityid('author-01') },
-			new UniqueEntityid('question-01'),
+			{ authorId: new UniqueEntityId('author-01') },
+			new UniqueEntityId('question-01'),
 		);
 		await questionsRepository.create(questionCreated);
 
