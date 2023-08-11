@@ -1,7 +1,7 @@
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
 import { makeAnswer } from 'test/factories/make-answer';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { EditAnswerUseCase } from './edit-answer';
 
@@ -16,8 +16,8 @@ describe('Edit answer', () => {
 
 	it('should be able to edit a answer', async () => {
 		const answerCreated = makeAnswer(
-			{ authorId: new UniqueEntityid('author-01'), content: 'Old content' },
-			new UniqueEntityid('answer-01'),
+			{ authorId: new UniqueEntityId('author-01'), content: 'Old content' },
+			new UniqueEntityId('answer-01'),
 		);
 		await answersRepository.create(answerCreated);
 
@@ -34,8 +34,8 @@ describe('Edit answer', () => {
 
 	it('should not be able to edit a answer from another author', async () => {
 		const answerCreated = makeAnswer(
-			{ authorId: new UniqueEntityid('author-01'), content: 'old content' },
-			new UniqueEntityid('answer-01'),
+			{ authorId: new UniqueEntityId('author-01'), content: 'old content' },
+			new UniqueEntityId('answer-01'),
 		);
 		await answersRepository.create(answerCreated);
 

@@ -1,7 +1,7 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
 import { makeQuestion } from 'test/factories/make-question';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { DeleteQuestionUseCase } from './delete-question';
 
@@ -16,8 +16,8 @@ describe('Delete question', () => {
 
 	it('should be able to delete a question', async () => {
 		const questionCreated = makeQuestion(
-			{ authorId: new UniqueEntityid('author-01') },
-			new UniqueEntityid('question-01'),
+			{ authorId: new UniqueEntityId('author-01') },
+			new UniqueEntityId('question-01'),
 		);
 		await questionsRepository.create(questionCreated);
 
@@ -31,8 +31,8 @@ describe('Delete question', () => {
 
 	it('should not be able to delete a question from another author', async () => {
 		const questionCreated = makeQuestion(
-			{ authorId: new UniqueEntityid('author-01') },
-			new UniqueEntityid('question-01'),
+			{ authorId: new UniqueEntityId('author-01') },
+			new UniqueEntityId('question-01'),
 		);
 		await questionsRepository.create(questionCreated);
 

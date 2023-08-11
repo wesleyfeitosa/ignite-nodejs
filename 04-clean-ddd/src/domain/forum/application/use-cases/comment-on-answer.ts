@@ -1,7 +1,7 @@
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment';
 import { type UseCaseError } from '@/core/errors/use-case-error';
 import { right, type Either, left } from '@/core/errors/either';
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type AnswersRepository } from '../repositories/answers-repository';
 import { type AnswerCommentsRepository } from '../repositories/answer-comments-repository';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
@@ -32,8 +32,8 @@ export class CommentOnAnswerUseCase {
 		}
 
 		const answerComment = AnswerComment.create({
-			authorId: new UniqueEntityid(authorId),
-			answerId: new UniqueEntityid(answerId),
+			authorId: new UniqueEntityId(authorId),
+			answerId: new UniqueEntityId(answerId),
 			content,
 		});
 

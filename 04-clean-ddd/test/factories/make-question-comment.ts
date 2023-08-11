@@ -4,16 +4,16 @@ import {
 	QuestionComment,
 	type QuestionCommentProps,
 } from '@/domain/forum/enterprise/entities/question-comment';
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 export function makeQuestionComment(
 	override: Partial<QuestionCommentProps> = {},
-	id?: UniqueEntityid,
+	id?: UniqueEntityId,
 ) {
 	const questionComment = QuestionComment.create(
 		{
-			authorId: new UniqueEntityid(),
-			questionId: new UniqueEntityid(),
+			authorId: new UniqueEntityId(),
+			questionId: new UniqueEntityId(),
 			content: faker.lorem.text(),
 			...override,
 		},

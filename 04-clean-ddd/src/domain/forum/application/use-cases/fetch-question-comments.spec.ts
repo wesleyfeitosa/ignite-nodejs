@@ -3,7 +3,7 @@ import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-
 import { makeQuestionComment } from 'test/factories/make-question-comment';
 import { makeQuestion } from 'test/factories/make-question';
 
-import { UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { FetchQuestionCommentsUseCase } from './fetch-question-comments';
 
 describe('Fetch question comments', () => {
@@ -28,7 +28,7 @@ describe('Fetch question comments', () => {
 		await questioncommentsRepository.create(questioncommentCreated1);
 		const questioncommentCreated2 = makeQuestionComment({
 			authorId: questionCreated.authorId,
-			questionId: new UniqueEntityid('question-02'),
+			questionId: new UniqueEntityId('question-02'),
 		});
 		await questioncommentsRepository.create(questioncommentCreated2);
 		const questioncommentCreated3 = makeQuestionComment({

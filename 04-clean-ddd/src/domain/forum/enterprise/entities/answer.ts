@@ -1,17 +1,17 @@
 import { type Optional } from '@/core/types/optional';
-import { type UniqueEntityid } from '@/core/entities/unique-entity-id';
+import { type UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Entity } from '@/core/entities/entity';
 
 export interface AnswerProps {
-	authorId: UniqueEntityid;
-	questionId: UniqueEntityid;
+	authorId: UniqueEntityId;
+	questionId: UniqueEntityId;
 	content: string;
 	createdAt: Date;
 	updatedAt?: Date;
 }
 
 export class Answer extends Entity<AnswerProps> {
-	static create(props: Optional<AnswerProps, 'createdAt'>, id?: UniqueEntityid) {
+	static create(props: Optional<AnswerProps, 'createdAt'>, id?: UniqueEntityId) {
 		const answer = new Answer(
 			{
 				...props,
