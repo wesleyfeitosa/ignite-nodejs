@@ -1,5 +1,7 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository';
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository';
 import { makeQuestion } from 'test/factories/make-question';
 import { makeAnswer } from 'test/factories/make-answer';
 
@@ -9,11 +11,15 @@ import { FetchQuestionAnswersUseCase } from './fetch-question-answers';
 describe('Fetch question answers', () => {
 	let answersRepository: InMemoryAnswersRepository;
 	let questionsRepository: InMemoryQuestionsRepository;
+	let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
+	let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 	let sut: FetchQuestionAnswersUseCase;
 
 	beforeEach(() => {
-		answersRepository = new InMemoryAnswersRepository();
-		questionsRepository = new InMemoryQuestionsRepository();
+		questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+		answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
+		answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository);
+		questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository);
 		sut = new FetchQuestionAnswersUseCase(answersRepository);
 	});
 

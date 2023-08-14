@@ -1,5 +1,6 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
 import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-question-comments-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository';
 import { makeQuestionComment } from 'test/factories/make-question-comment';
 import { makeQuestion } from 'test/factories/make-question';
 
@@ -10,11 +11,13 @@ import { DeleteQuestionCommentUseCase } from './delete-question-comment';
 describe('Delete question comment comment', () => {
 	let questionCommentsRepository: InMemoryQuestionCommentsRepository;
 	let questionsRepository: InMemoryQuestionsRepository;
+	let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 	let sut: DeleteQuestionCommentUseCase;
 
 	beforeEach(() => {
 		questionCommentsRepository = new InMemoryQuestionCommentsRepository();
-		questionsRepository = new InMemoryQuestionsRepository();
+		questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+		questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository);
 		sut = new DeleteQuestionCommentUseCase(questionCommentsRepository);
 	});
 

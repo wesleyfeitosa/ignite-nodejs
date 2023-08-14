@@ -1,5 +1,6 @@
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
 import { InMemoryAnswerCommentsRepository } from 'test/repositories/in-memory-answer-comments-repository';
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository';
 import { makeAnswerComment } from 'test/factories/make-answer-comment';
 import { makeAnswer } from 'test/factories/make-answer';
 
@@ -9,11 +10,13 @@ import { FetchAnswerCommentsUseCase } from './fetch-answer-comments';
 describe('Fetch answer comments', () => {
 	let answerCommentsRepository: InMemoryAnswerCommentsRepository;
 	let answersRepository: InMemoryAnswersRepository;
+	let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 	let sut: FetchAnswerCommentsUseCase;
 
 	beforeEach(() => {
 		answerCommentsRepository = new InMemoryAnswerCommentsRepository();
-		answersRepository = new InMemoryAnswersRepository();
+		answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
+		answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository);
 		sut = new FetchAnswerCommentsUseCase(answerCommentsRepository);
 	});
 
