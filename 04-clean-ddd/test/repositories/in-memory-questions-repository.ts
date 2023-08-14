@@ -1,9 +1,12 @@
 import { type Question } from '@/domain/forum/enterprise/entities/questions';
 import { type QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
+import { type QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository';
 import { type PaginationParams } from '@/core/repositories/pagination-params';
 
 export class InMemoryQuestionsRepository implements QuestionsRepository {
 	public items: Question[] = [];
+
+	constructor(private readonly questionAttachmentsRepository: QuestionAttachmentsRepository) {}
 
 	async create(question: Question) {
 		this.items.push(question);
@@ -60,5 +63,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 		const questionIndex = this.items.findIndex((item) => item.id === question.id);
 
 		this.items.splice(questionIndex, 1);
+
+		await this.questionAttachmentsRepository.deleteManyByQuestionId(question.id.toString());
 	}
 }

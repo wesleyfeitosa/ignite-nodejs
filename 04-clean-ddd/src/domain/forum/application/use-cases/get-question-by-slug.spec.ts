@@ -1,4 +1,5 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository';
 import { makeQuestion } from 'test/factories/make-question';
 
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
@@ -6,10 +7,12 @@ import { GetQuestionBySlugUseCase } from './get-question-by-slug';
 
 describe('Get question by slug', () => {
 	let questionsRepository: InMemoryQuestionsRepository;
+	let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 	let sut: GetQuestionBySlugUseCase;
 
 	beforeEach(() => {
-		questionsRepository = new InMemoryQuestionsRepository();
+		questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+		questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository);
 		sut = new GetQuestionBySlugUseCase(questionsRepository);
 	});
 

@@ -1,15 +1,17 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository';
 import { makeQuestion } from 'test/factories/make-question';
 
-import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
 import { FetchRecentQuestionsUseCase } from './fetch-recent-questions';
 
 describe('Fetch recent questions', () => {
 	let questionsRepository: InMemoryQuestionsRepository;
+	let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 	let sut: FetchRecentQuestionsUseCase;
 
 	beforeEach(() => {
-		questionsRepository = new InMemoryQuestionsRepository();
+		questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+		questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository);
 		sut = new FetchRecentQuestionsUseCase(questionsRepository);
 	});
 
