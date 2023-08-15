@@ -1,8 +1,8 @@
 import { type UseCaseError } from '@/core/errors/use-case-error';
 import { right, type Either, left } from '@/core/errors/either';
 import { type AnswersRepository } from '../repositories/answers-repository';
-import { ResourceNotFoundError } from './errors/resource-not-found-error';
-import { NotAllowedError } from './errors/not-allowed-error';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 
 interface DeleteAnswerUseCaseRequest {
 	authorId: string;

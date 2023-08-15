@@ -1,10 +1,10 @@
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
 import { type UseCaseError } from '@/core/errors/use-case-error';
 import { right, type Either, left } from '@/core/errors/either';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type QuestionsRepository } from '../repositories/questions-repository';
 import { type QuestionCommentsRepository } from '../repositories/question-comments-repository';
-import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 interface CommentOnQuestionUseCaseRequest {
 	authorId: string;

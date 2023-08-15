@@ -1,4 +1,4 @@
-import { Question } from '@/domain/forum/enterprise/entities/questions';
+import { Question } from '@/domain/forum/enterprise/entities/question';
 import { type Either, right } from '@/core/errors/either';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type QuestionsRepository } from '../repositories/questions-repository';

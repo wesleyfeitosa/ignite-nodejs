@@ -4,8 +4,8 @@ import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory
 import { makeAnswerComment } from 'test/factories/make-answer-comment';
 import { makeAnswer } from 'test/factories/make-answer';
 
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
-import { NotAllowedError } from './errors/not-allowed-error';
 import { DeleteAnswerCommentUseCase } from './delete-answer-comment';
 
 describe('Delete answer comment comment', () => {

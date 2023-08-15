@@ -1,4 +1,4 @@
-import { type Question } from '@/domain/forum/enterprise/entities/questions';
+import { type Question } from '@/domain/forum/enterprise/entities/question';
 import { type QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
 import { type QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository';
 import { type PaginationParams } from '@/core/repositories/pagination-params';

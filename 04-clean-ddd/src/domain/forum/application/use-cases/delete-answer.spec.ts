@@ -3,8 +3,8 @@ import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachment';
 import { makeAnswer } from 'test/factories/make-answer';
 
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
-import { NotAllowedError } from './errors/not-allowed-error';
 import { DeleteAnswerUseCase } from './delete-answer';
 
 describe('Delete answer', () => {

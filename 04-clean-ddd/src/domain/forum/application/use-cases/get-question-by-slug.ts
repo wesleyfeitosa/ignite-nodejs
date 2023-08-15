@@ -1,8 +1,8 @@
-import { type Question } from '@/domain/forum/enterprise/entities/questions';
+import { type Question } from '@/domain/forum/enterprise/entities/question';
 import { type UseCaseError } from '@/core/errors/use-case-error';
 import { type Either, left, right } from '@/core/errors/either';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
 import { type QuestionsRepository } from '../repositories/questions-repository';
-import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 interface GetQuestionBySlugUseCaseRequest {
 	slug: string;
