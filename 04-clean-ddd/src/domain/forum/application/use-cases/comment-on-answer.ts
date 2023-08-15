@@ -4,7 +4,7 @@ import { right, type Either, left } from '@/core/errors/either';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type AnswersRepository } from '../repositories/answers-repository';
 import { type AnswerCommentsRepository } from '../repositories/answer-comments-repository';
-import { ResourceNotFoundError } from './errors/resource-not-found-error';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
 
 interface CommentOnAnswerUseCaseRequest {
 	authorId: string;

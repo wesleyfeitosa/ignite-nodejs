@@ -1,10 +1,10 @@
-import { type Question } from '@/domain/forum/enterprise/entities/questions';
+import { type Question } from '@/domain/forum/enterprise/entities/question';
 import { type UseCaseError } from '@/core/errors/use-case-error';
 import { right, type Either, left } from '@/core/errors/either';
 import { type QuestionsRepository } from '../repositories/questions-repository';
 import { type AnswersRepository } from '../repositories/answers-repository';
-import { ResourceNotFoundError } from './errors/resource-not-found-error';
-import { NotAllowedError } from './errors/not-allowed-error';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 
 interface ChooseQuestionBestAnswerUseCaseRequest {
 	authorId: string;

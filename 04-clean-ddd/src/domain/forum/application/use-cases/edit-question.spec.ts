@@ -3,8 +3,8 @@ import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memo
 import { makeQuestionAttachment } from 'test/factories/make-question-attachment';
 import { makeQuestion } from 'test/factories/make-question';
 
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
-import { NotAllowedError } from './errors/not-allowed-error';
 import { EditQuestionUseCase } from './edit-question';
 
 describe('Edit question', () => {

@@ -1,4 +1,4 @@
-import { type Question } from '@/domain/forum/enterprise/entities/questions';
+import { type Question } from '@/domain/forum/enterprise/entities/question';
 import { type PaginationParams } from '@/core/repositories/pagination-params';
 
 export interface QuestionsRepository {

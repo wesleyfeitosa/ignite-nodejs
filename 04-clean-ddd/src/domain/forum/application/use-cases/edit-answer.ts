@@ -6,8 +6,8 @@ import { right, type Either, left } from '@/core/errors/either';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type AnswersRepository } from '../repositories/answers-repository';
 import { type AnswerAttachmentsRepository } from '../repositories/answer-attachments-repository';
-import { ResourceNotFoundError } from './errors/resource-not-found-error';
-import { NotAllowedError } from './errors/not-allowed-error';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 
 interface EditAnswerUseCaseRequest {
 	authorId: string;

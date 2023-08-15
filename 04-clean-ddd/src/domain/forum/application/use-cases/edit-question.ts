@@ -1,13 +1,13 @@
-import { type Question } from '@/domain/forum/enterprise/entities/questions';
 import { QuestionAttachmentList } from '@/domain/forum/enterprise/entities/question-attachment-list';
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment';
+import { type Question } from '@/domain/forum/enterprise/entities/question';
 import { type UseCaseError } from '@/core/errors/use-case-error';
 import { right, type Either, left } from '@/core/errors/either';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type QuestionsRepository } from '../repositories/questions-repository';
 import { type QuestionAttachmentsRepository } from '../repositories/question-attachments-repository';
-import { ResourceNotFoundError } from './errors/resource-not-found-error';
-import { NotAllowedError } from './errors/not-allowed-error';
 
 interface EditQuestionUseCaseRequest {
 	authorId: string;
