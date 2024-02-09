@@ -5,8 +5,8 @@ import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory
 import { makeQuestion } from 'test/factories/make-question';
 import { makeAnswer } from 'test/factories/make-answer';
 
-import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer';
 
 describe('Choose question best answer', () => {

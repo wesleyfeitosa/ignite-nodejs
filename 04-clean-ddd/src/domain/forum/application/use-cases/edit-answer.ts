@@ -3,11 +3,11 @@ import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-atta
 import { type Answer } from '@/domain/forum/enterprise/entities/answer';
 import { type UseCaseError } from '@/core/errors/use-case-error';
 import { right, type Either, left } from '@/core/errors/either';
+import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
+import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type AnswersRepository } from '../repositories/answers-repository';
 import { type AnswerAttachmentsRepository } from '../repositories/answer-attachments-repository';
-import { ResourceNotFoundError } from '@/core/errors/cases/resource-not-found-error';
-import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
 
 interface EditAnswerUseCaseRequest {
 	authorId: string;

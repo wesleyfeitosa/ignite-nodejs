@@ -3,8 +3,8 @@ import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachment';
 import { makeAnswer } from 'test/factories/make-answer';
 
-import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from '@/core/errors/cases/not-allowed-error';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { EditAnswerUseCase } from './edit-answer';
 
 describe('Edit answer', () => {

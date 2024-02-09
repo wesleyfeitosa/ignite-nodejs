@@ -1,6 +1,6 @@
 import { type Optional } from '@/core/types/optional';
 import { type UniqueEntityId } from '@/core/entities/unique-entity-id';
-import { Entity } from '@/core/entities/entity';
+import { AggregateRoot } from '@/core/entities/aggregate-root';
 import { AnswerAttachmentList } from './answer-attachment-list';
 
 export interface AnswerProps {
@@ -12,7 +12,7 @@ export interface AnswerProps {
 	updatedAt?: Date;
 }
 
-export class Answer extends Entity<AnswerProps> {
+export class Answer extends AggregateRoot<AnswerProps> {
 	static create(props: Optional<AnswerProps, 'createdAt' | 'attachments'>, id?: UniqueEntityId) {
 		const answer = new Answer(
 			{
