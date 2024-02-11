@@ -14,7 +14,10 @@ export interface AnswerProps {
 }
 
 export class Answer extends AggregateRoot<AnswerProps> {
-	static create(props: Optional<AnswerProps, 'createdAt' | 'attachments'>, id?: UniqueEntityId) {
+	static create(
+		props: Optional<AnswerProps, 'createdAt' | 'attachments'>,
+		id?: UniqueEntityId,
+	) {
 		const answer = new Answer(
 			{
 				...props,

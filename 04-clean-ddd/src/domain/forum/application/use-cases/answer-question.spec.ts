@@ -11,7 +11,9 @@ describe('Aswer question', () => {
 
 	beforeEach(() => {
 		answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
-		answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository);
+		answersRepository = new InMemoryAnswersRepository(
+			answerAttachmentsRepository,
+		);
 		sut = new AnswerQuestionUseCase(answersRepository);
 	});
 

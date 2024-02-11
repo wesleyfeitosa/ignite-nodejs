@@ -5,7 +5,10 @@ import { type DomainEvent } from './domain-event';
 type DomainEventCallback = (event: any) => void;
 
 export class DomainEvents {
-	// Public methods
+	/**
+	 * Marks an aggregate for dispatch
+	 * @param aggregate The aggregate to be marked for dispatch
+	 */
 	public static markAggregateForDispatch(aggregate: AggregateRoot<any>) {
 		const aggregateFound = Boolean(this.findMarkedAggregateByID(aggregate.id));
 
@@ -16,6 +19,10 @@ export class DomainEvents {
 		}
 	}
 
+	/**
+	 * Dispatches all events for a given aggregate
+	 * @param id The aggregate id
+	 */
 	public static dispatchEventsForAggregate(id: UniqueEntityId) {
 		const aggregate = this.findMarkedAggregateByID(id);
 
@@ -28,6 +35,11 @@ export class DomainEvents {
 		}
 	}
 
+	/**
+	 * Registers a callback for a given event
+	 * @param callback The callback to be registered
+	 * @param eventClassName The event class name
+	 */
 	public static register(
 		callback: DomainEventCallback,
 		eventClassName: string,
