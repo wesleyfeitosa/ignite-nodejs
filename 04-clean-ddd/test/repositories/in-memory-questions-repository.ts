@@ -6,7 +6,9 @@ import { type PaginationParams } from '@/core/repositories/pagination-params';
 export class InMemoryQuestionsRepository implements QuestionsRepository {
 	public items: Question[] = [];
 
-	constructor(private readonly questionAttachmentsRepository: QuestionAttachmentsRepository) {}
+	constructor(
+		private readonly questionAttachmentsRepository: QuestionAttachmentsRepository,
+	) {}
 
 	async create(question: Question) {
 		this.items.push(question);
@@ -24,7 +26,9 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 	}
 
 	async save(question: Question): Promise<void> {
-		const questionIndex = this.items.findIndex((item) => item.id === question.id);
+		const questionIndex = this.items.findIndex(
+			(item) => item.id === question.id,
+		);
 
 		this.items[questionIndex] = question;
 	}
@@ -55,16 +59,23 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 		const sortedItems = this.items
 			.slice()
 			.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-		const questions = sortedItems.slice((page - 1) * ITEMS_BY_PAGE, page * ITEMS_BY_PAGE);
+		const questions = sortedItems.slice(
+			(page - 1) * ITEMS_BY_PAGE,
+			page * ITEMS_BY_PAGE,
+		);
 
 		return questions;
 	}
 
 	async delete(question: Question) {
-		const questionIndex = this.items.findIndex((item) => item.id === question.id);
+		const questionIndex = this.items.findIndex(
+			(item) => item.id === question.id,
+		);
 
 		this.items.splice(questionIndex, 1);
 
-		await this.questionAttachmentsRepository.deleteManyByQuestionId(question.id.toString());
+		await this.questionAttachmentsRepository.deleteManyByQuestionId(
+			question.id.toString(),
+		);
 	}
 }

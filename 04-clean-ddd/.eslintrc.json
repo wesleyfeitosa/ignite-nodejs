@@ -17,6 +17,7 @@
         "*.tsx" 
       ],
       "rules": {
+        "brace-style": "off",
         "object-curly-spacing": ["error", "always"],
         "@typescript-eslint/object-curly-spacing": "off",
         "@typescript-eslint/naming-convention": "off",
@@ -24,6 +25,7 @@
         "@typescript-eslint/ban-types": "off",
         "@typescript-eslint/no-extraneous-class": ["error", {"allowStaticOnly": true}],
         "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+        "@typescript-eslint/brace-style": "off",
         "import/order": ["error", {
           "groups": [
             "builtin", "external", "internal"

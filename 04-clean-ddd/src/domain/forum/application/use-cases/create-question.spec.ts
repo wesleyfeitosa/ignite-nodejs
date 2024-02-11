@@ -11,7 +11,9 @@ describe('Create question', () => {
 
 	beforeEach(() => {
 		questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
-		questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository);
+		questionsRepository = new InMemoryQuestionsRepository(
+			questionAttachmentsRepository,
+		);
 		sut = new CreateQuestionUseCase(questionsRepository);
 	});
 
@@ -26,7 +28,9 @@ describe('Create question', () => {
 		expect(result.isRight()).toBeTruthy();
 		expect(result.value?.question.title).toEqual('New question');
 		expect(questionsRepository.items[0].id).toEqual(result.value?.question.id);
-		expect(questionsRepository.items[0].attachments.currentItems).toHaveLength(2);
+		expect(questionsRepository.items[0].attachments.currentItems).toHaveLength(
+			2,
+		);
 		expect(questionsRepository.items[0].attachments.currentItems).toEqual([
 			expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
 			expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),

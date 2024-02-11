@@ -2,14 +2,19 @@ import { type Answer } from '@/domain/forum/enterprise/entities/answer';
 import { type AnswersRepository } from '@/domain/forum/application/repositories/answers-repository';
 import { type AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository';
 import { type PaginationParams } from '@/core/repositories/pagination-params';
+import { DomainEvents } from '@/core/events/domain-events';
 
 export class InMemoryAnswersRepository implements AnswersRepository {
 	public items: Answer[] = [];
 
-	constructor(private readonly answerAttachmentsRepository: AnswerAttachmentsRepository) {}
+	constructor(
+		private readonly answerAttachmentsRepository: AnswerAttachmentsRepository,
+	) {}
 
 	async create(answer: Answer) {
 		this.items.push(answer);
+
+		DomainEvents.dispatchEventsForAggregate(answer.id);
 	}
 
 	async bulkCreate(data: Answer[]) {
@@ -18,6 +23,8 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 		for (const dataItem of data) {
 			createdItems.push(dataItem);
 			this.items.push(dataItem);
+
+			DomainEvents.dispatchEventsForAggregate(dataItem.id);
 		}
 
 		return createdItems.length;
@@ -27,6 +34,8 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 		const answerIndex = this.items.findIndex((item) => item.id === answer.id);
 
 		this.items[answerIndex] = answer;
+
+		DomainEvents.dispatchEventsForAggregate(answer.id);
 	}
 
 	async findById(id: string) {
@@ -55,6 +64,8 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 
 		this.items.splice(answerIndex, 1);
 
-		await this.answerAttachmentsRepository.deleteManyByAnswerId(answer.id.toString());
+		await this.answerAttachmentsRepository.deleteManyByAnswerId(
+			answer.id.toString(),
+		);
 	}
 }

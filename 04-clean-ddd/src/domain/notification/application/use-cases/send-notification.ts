@@ -3,16 +3,21 @@ import { right, type Either } from '@/core/errors/either';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { type NotificationsRepository } from '../repositories/notifications-repository';
 
-interface SendNotificationUseCaseRequest {
+export interface SendNotificationUseCaseRequest {
 	recipientId: string;
 	title: string;
 	content: string;
 }
 
-type SendNotificationUseCaseResponse = Either<null, { notification: Notification }>;
+export type SendNotificationUseCaseResponse = Either<
+	null,
+	{ notification: Notification }
+>;
 
 export class SendNotificationUseCase {
-	constructor(private readonly notificationsRepository: NotificationsRepository) {}
+	constructor(
+		private readonly notificationsRepository: NotificationsRepository,
+	) {}
 
 	async execute({
 		content,
